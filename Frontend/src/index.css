@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+body {
+  background: #ffffff;
+}
+
+input,
+textarea {
+  color: #000;
+}
 /*
 @plugin "tailwindcss-animate";
 

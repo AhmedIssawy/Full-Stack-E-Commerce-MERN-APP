@@ -20,6 +20,10 @@ import Register from "../pages/Auth/Register.jsx";
 import App from "../App.jsx";
 import SessionGuard from "../components/SessionGuard.jsx";
 
+// Admin pages
+import AdminRoute from "../pages/Admin/AdminRoute.jsx";
+import UserList from "../pages/Admin/UserList.jsx";
+
 export const AppRoutes = () => {
   const routes = createRoutesFromElements(
     <Route path="/" element={<SessionGuard />}>
@@ -29,6 +33,10 @@ export const AppRoutes = () => {
         <Route path="/register" element={<Register />} />
         <Route path="" element={<PrivateRoute />}>
           <Route path="/profile" element={<Profile />} />
+        </Route>
+        {/*Admin Routes */}
+        <Route path="/admin" element={<AdminRoute />}>
+          <Route path="userlist" element={<UserList />} />
         </Route>
       </Route>
     </Route>

@@ -1,9 +1,10 @@
 import React from "react";
 import { AiOutlineHome } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const SideBarIcon = React.memo(
   ({ path, title, icon: Icon = AiOutlineHome, rose = false, showTitle }) => {
+    const navigate = useNavigate();
     return (
       <div>
         <Link
@@ -12,14 +13,13 @@ const SideBarIcon = React.memo(
           }`}
           to={path}
         >
-          <div className="whitespace-nowrap">
-            <Icon
-              title={title}
-              size={26}
-              className="mr-2 mt-[2rem]"
-            />
+          <div onClick={() => navigate(title)} className="whitespace-nowrap">
+            <Icon title={title} size={26} className="mr-2 mt-[2rem]" />
             {showTitle ? (
-              <span className="select-none  align-middle mt-[2rem]">
+              <span
+                onClick={() => navigate(title)}
+                className="select-none  align-middle mt-[2rem]"
+              >
                 {title}
               </span>
             ) : (

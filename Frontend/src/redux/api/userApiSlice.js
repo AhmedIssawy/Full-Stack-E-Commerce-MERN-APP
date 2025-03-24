@@ -25,14 +25,41 @@ export const userApiSlice = apiSlice.injectEndpoints({
     }),
     profile: builder.mutation({
       query: (data) => ({
-       url: `${USERS_URL}/profile`,
-       method: "PATCH",
-       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`, 
-        "Content-Type": "application/json",
-      },
-       body: data
+        url: `${USERS_URL}/profile`,
+        method: "PATCH",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          "Content-Type": "application/json",
+        },
+        body: data,
       }),
+    }),
+    getUsers: builder.query({
+      query: () => ({
+        url: USERS_URL,
+      }),
+      
+    }),
+    deleteUser: builder.mutation({
+      query: (userId) => ({
+        url: `${USERS_URL}/${userId}`,
+        method: "DELETE",
+      }),
+    }),
+    getUsersDetails: builder.query({
+      query: (userId) => ({
+        url: `${USERS_URL}/${userId}`,
+      }),
+      keepUnusedDataFor: 5,
+    }),
+
+    updateUser: builder.mutation({
+      query: (data) => ({
+        url: `${USERS_URL}/${data.userId}`,
+        method: "PUT", //get back
+        body: data,
+      }),
+      invalidatesTags: ["User"],
     }),
   }),
 });
@@ -42,4 +69,8 @@ export const {
   useLoginMutation,
   useLogoutMutation,
   useRegisterMutation,
+  useGetUsersQuery,
+  useDeleteUserMutation,
+  useGetUsersDetailsQuery,
+  useUpdateUserMutation,
 } = userApiSlice;

@@ -52,7 +52,7 @@ const loginUser = asyncHandler(async (req, res) => {
 
   if (logginedUser.email && comparedPassword) {
     generateTOken(res, logginedUser._id);
-    res.status(201).json({
+    res.status(200).json({
       _id: logginedUser._id,
       username: logginedUser.username,
       email: logginedUser.email,
@@ -70,13 +70,13 @@ const logoutCurrentUser = asyncHandler(async (req, res) => {
 });
 
 const getAllUsers = asyncHandler(async (req, res) => {
-  const result = await User.find({});
+  const result = await User.find({}).select("-password");
   if (result) res.status(201).json({ users: result });
   res.status(401).json({ message: "Internal Error pls refresh" });
 });
 
 const getCurrentUserProfile = asyncHandler(async (req, res) => {
-  const user = await User.findOne(req.user._id).select("-password");
+  const user = await User.findOne(req.user._id).select("-password -__v");
   if (user) {
     res.json({
       ...user._doc,

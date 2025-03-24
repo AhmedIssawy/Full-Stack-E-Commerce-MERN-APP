@@ -39,7 +39,7 @@ const Navigation = () => {
     setClicked((prev) => !prev);
     setShowSidebar((prev) => !prev);
   };
-  console.log(userInfo);
+  // console.log(userInfo);
 
   const closeSidebar = () => {
     setShowSidebar(false);
@@ -55,7 +55,7 @@ const Navigation = () => {
       dispatch(logout());
       await logoutApiCall().unwrap();
       navigate("/login");
-      toast(`Logged out successfully👍`, {
+      toast.success(`Logged out successfully👍`, {
         theme: "dark",
         pauseOnHover: false,
       });

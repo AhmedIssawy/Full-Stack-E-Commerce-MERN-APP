@@ -13,11 +13,14 @@ import {
 
 const router = Router();
 
-router.route("/").post(authinticate, authorizeAdmin, createCategory);
+router
+  .route("/")
+  .get(getAllCategories)
+  .post(authinticate, authorizeAdmin, createCategory);
 router
   .route("/:categoryId")
-  .get(authinticate, getOneCategory)
+  .get(getOneCategory)
   .put(authinticate, authorizeAdmin, updateCategory)
   .delete(authinticate, authorizeAdmin, deleteCategory);
-router.route("/categories").get(authinticate, getAllCategories);
+
 export default router;

@@ -23,6 +23,7 @@ import SessionGuard from "../components/SessionGuard.jsx";
 // Admin pages
 import AdminRoute from "../pages/Admin/AdminRoute.jsx";
 import UserList from "../pages/Admin/UserList.jsx";
+import CategoryList from "../pages/Admin/CategoryList.jsx";
 
 export const AppRoutes = () => {
   const routes = createRoutesFromElements(
@@ -37,6 +38,7 @@ export const AppRoutes = () => {
         {/*Admin Routes */}
         <Route path="/admin" element={<AdminRoute />}>
           <Route path="userlist" element={<UserList />} />
+          <Route path="categorylist" element={<CategoryList />} />
         </Route>
       </Route>
     </Route>

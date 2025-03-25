@@ -38,18 +38,22 @@ const Profile = () => {
   if (fullInformation?.password)
     updatedFields.password = fullInformation.password;
 
-  
-
   const submitHandler = async (e) => {
     e.preventDefault();
     if (fullInformation.password != confirmPassword) {
-      toast.error("Password and confirm password do not match!", {theme: "dark"});
+      toast.error("Password and confirm password do not match!", {
+        theme: "dark",
+      });
       return;
     } else {
       try {
-        if (!updatedFields.username && !updatedFields.email && !updatedFields.password) {
+        if (
+          !updatedFields.username &&
+          !updatedFields.email &&
+          !updatedFields.password
+        ) {
           toast.info("No changes detected", {
-            theme: "dark"
+            theme: "dark",
           });
           return;
         }
@@ -59,10 +63,12 @@ const Profile = () => {
         }).unwrap();
         dispatch(setCredientials({ ...res }));
         toast.success("Profile updated  successfully!", {
-          theme: "dark"
+          theme: "dark",
         });
       } catch (error) {
-        toast.error("IDK", {theme: "dark"});
+        toast.error(error.data.message || error.data.error || "IDK", {
+          theme: "dark",
+        });
       }
     }
   };
@@ -120,14 +126,13 @@ const Profile = () => {
             <div className="flex justify-between">
               <button
                 type="submit"
-                className="border rounded py-2 px-4 cursor-pointer
-                hover:bg-gray-200"
+                className="py-3 px-6 cursor-pointer rounded-2xl border border-blue-500 bg-gradient-to-r from-blue-600 to-blue-500 text-white font-semibold shadow-lg transition-all duration-300 hover:scale-105 active:scale-95 focus:outline-none focus:ring-4 focus:ring-blue-400/50"
               >
                 {isLoading ? <FaSpinner className="animate-spin" /> : "Update"}
               </button>
               <Link
                 to={"/user-order"}
-                className="text-black py-2 px-4 rounded border hover:bg-gray-200"
+                className="py-3 px-6 cursor-pointer rounded-2xl border border-blue-500 bg-gradient-to-r from-blue-600 to-blue-500 text-white font-semibold shadow-lg transition-all duration-300 hover:scale-105 active:scale-95 focus:outline-none focus:ring-4 focus:ring-blue-400/50"
               >
                 My Orders
               </Link>

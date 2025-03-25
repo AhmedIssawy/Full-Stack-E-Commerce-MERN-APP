@@ -61,6 +61,9 @@ const Navigation = () => {
       });
     } catch (error) {
       console.error(error);
+      toast.error(error.data.message || error.data.error || error.messgae, {
+        theme: "dark",
+      });
     }
   };
   return (
@@ -136,19 +139,29 @@ const Navigation = () => {
               (userInfo.isAdmin ? (
                 <ul className="absolute bottom-full left-0 mb-2 bg-white text-gray-800 shadow-lg rounded-lg py-2 w-40 border border-gray-300">
                   <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer select-none">
-                    <Link onClick={toggleDropdown} to="/admin/dashboard">Dashboard</Link>
+                    <Link onClick={toggleDropdown} to="/admin/dashboard">
+                      Dashboard
+                    </Link>
                   </li>
                   <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer select-none">
-                    <Link onClick={toggleDropdown} to="/admin/productlist">Products</Link>
+                    <Link onClick={toggleDropdown} to="/admin/productlist">
+                      Products
+                    </Link>
                   </li>
                   <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer select-none">
-                    <Link onClick={toggleDropdown} to="/admin/categorylist">Category</Link>
+                    <Link onClick={toggleDropdown} to="/admin/categorylist">
+                      Category
+                    </Link>
                   </li>
                   <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer select-none">
-                    <Link onClick={toggleDropdown} to="/admin/orderlist">Orders</Link>
+                    <Link onClick={toggleDropdown} to="/admin/orderlist">
+                      Orders
+                    </Link>
                   </li>
                   <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer select-none">
-                    <Link onClick={toggleDropdown} to="/admin/userlist">Users</Link>
+                    <Link onClick={toggleDropdown} to="/admin/userlist">
+                      Users
+                    </Link>
                   </li>
                   <li
                     className="px-4 py-2 hover:bg-gray-200 cursor-pointer select-none"

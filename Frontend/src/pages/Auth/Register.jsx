@@ -19,9 +19,7 @@ const Register = () => {
 
   useEffect(() => {
     if (userInfo) {
-      navigate("/home");
-      console.log(userInfo);
-      
+      navigate("/");
     }
   }, [navigate, userInfo]);
 
@@ -65,7 +63,7 @@ const Register = () => {
         pauseOnHover: false,
       });
     } catch (error) {
-      toast.error(error?.data?.message),
+      toast.error(error?.data?.message || error.data.error),
         {
           theme: "dark",
           pauseOnHover: false,

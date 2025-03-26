@@ -70,7 +70,7 @@ const logoutCurrentUser = asyncHandler(async (req, res) => {
 });
 
 const getAllUsers = asyncHandler(async (req, res) => {
-  const result = await User.find({}).select("-password");
+  const result = await User.find({}).select("-password").sort({ isAdmin: -1 });
   if (result) res.status(201).json({ users: result });
   res.status(401).json({ message: "Internal Error pls refresh" });
 });

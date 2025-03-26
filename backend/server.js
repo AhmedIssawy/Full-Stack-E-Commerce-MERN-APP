@@ -10,13 +10,17 @@ import cors from "cors";
 
 //Utils
 import connectDB from "./config/db.js";
+
+//Routes
 import userRoutes from "./routes/userRoutes.js";
 import categoryRoutes from "./routes/categoryRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
+import uploadRoutes from "./routes/uploadRoutes.js";
 
 dotenv.config();
 connectDB();
 const port = process.env.PORT || 5000;
+const __dirname = path.resolve();
 
 const app = express();
 
@@ -32,6 +36,8 @@ app.use(cors({ origin: "http://localhost:5173" }));
 app.use("/api/users", userRoutes);
 app.use("/api/categories", categoryRoutes);
 app.use("/api/products", productRoutes);
+app.use("/api/upload", uploadRoutes);
+app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 
 app.listen(port, () =>
   console.log(`Server is running on http://localhost:${port}/`)

@@ -25,6 +25,8 @@ const SessionGuard = () => {
     };
 
     checkExpiration();
+    const interval = setInterval(checkExpiration, 10000);
+    return () => clearInterval(interval)
   }, [dispatch, navigate]);
 
   return <Outlet />;

@@ -1,0 +1,23 @@
+/* nprogress-custom.css */
+
+/* Change the background color of the progress bar */
+#nprogress .bar {
+    background: linear-gradient(90deg, #ff00ff); /* Gradient effect */
+    height: 4px; /* Adjust the height */
+  }
+  
+  /* Customize the shadow behind the progress bar */
+  #nprogress .peg {
+    box-shadow: 0 0 10px #ff7700, 0 0 5px #ff00ff;
+  }
+  
+  /* Customize the spinner */
+  #nprogress .spinner {
+    display: block; /* Show the spinner */
+  }
+  
+  #nprogress .spinner-icon {
+    border-top-color: #ff00ff;
+    border-left-color: #ff7700;
+  }
+  

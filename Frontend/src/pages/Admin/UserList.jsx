@@ -51,6 +51,10 @@ const UserList = () => {
       toast.error(error.data.message || error.message || "error");
     }
   };
+
+  useEffect(() => {
+      document.title = "Manage Users";
+    }, []);
   return (
     <div className="p-4">
       <h1 className="text-2xl font-semibold mb-4">
@@ -62,7 +66,6 @@ const UserList = () => {
           </Message>
         ) : (
           <div className="flex flex-col md:flex-row">
-            {/*AdminMenu */}
             <table className="w-full md:w-4/5 mx-auto">
               <thead>
                 <tr className="border">

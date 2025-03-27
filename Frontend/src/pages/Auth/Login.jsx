@@ -26,16 +26,20 @@ const Login = () => {
   const sibmitHandler = async (e) => {
     e.preventDefault();
     try {
-      const res = await login({ email, password }).unwrap()
+      const res = await login({ email, password }).unwrap();
       dispatch(setCredientials({ ...res }));
-      toast("Logged in successfully 👍", {
+      toast.success("Logged in successfully 👍", {
         theme: "dark",
-        pauseOnHover: false
-      })
+        pauseOnHover: false,
+      });
     } catch (error) {
       toast.error(error?.data?.message || error.message);
     }
   };
+
+  useEffect(() => {
+    document.title = "Login";
+  }, []);
   return (
     <div>
       <section className="pl-[10rem] flex flex-wrap">

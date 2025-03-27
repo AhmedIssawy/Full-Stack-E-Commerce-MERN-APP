@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   useCreateCategoryMutation,
   useDeleteCategoryMutation,
@@ -101,6 +101,10 @@ const CategoryList = () => {
       });
     }
   };
+
+  useEffect(() => {
+      document.title = "Create Categories";
+    }, []);
 
   return (
     <div className="pl-[10rem] flex flex-col md:flex-row">

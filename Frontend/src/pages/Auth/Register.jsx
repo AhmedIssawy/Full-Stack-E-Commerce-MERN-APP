@@ -71,6 +71,9 @@ const Register = () => {
       console.error(error);
     }
   };
+  useEffect(() => {
+      document.title = "Register";
+    }, []);
 
   return (
     <section className="pl-[10rem] flex flex-wrap">

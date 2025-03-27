@@ -1,4 +1,10 @@
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
+
 const NotFound = () => {
+  useEffect(() => {
+    document.title = "Page not found";
+  }, []);
   return (
     <div className="pl-[44rem] mt-27 flex flex-wrap">
       <section className="flex items-center h-full p-16 dark:bg-gray-50 dark:text-gray-800">
@@ -14,13 +20,12 @@ const NotFound = () => {
               But dont worry, you can find plenty of other things on our
               homepage.
             </p>
-            <a
-              rel="noopener noreferrer"
-              href="/home"
+            <Link
+              to={"/"}
               className="px-8 py-3 font-semibold rounded dark:bg-violet-600 dark:text-gray-50 hover:bg-violet-800"
             >
               Back to homepage
-            </a>
+            </Link>
           </div>
         </div>
       </section>

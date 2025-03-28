@@ -9,7 +9,10 @@ const createUser = asyncHandler(async (req, res) => {
     throw new Error("Please fill all inputs");
   }
   const userExists = await User.findOne({ email });
-  if (userExists) return res.status(409).json({ message: "User already exists! try to login in." });
+  if (userExists)
+    return res
+      .status(409)
+      .json({ message: "User already exists! try to login in." });
 
   //Hashing password
   const salt = await bcrypt.genSalt(10);
@@ -71,8 +74,11 @@ const logoutCurrentUser = asyncHandler(async (req, res) => {
 
 const getAllUsers = asyncHandler(async (req, res) => {
   const result = await User.find({}).select("-password").sort({ isAdmin: -1 });
-  if (result) res.status(201).json({ users: result });
-  res.status(401).json({ message: "Internal Error pls refresh" });
+  if (result) {
+    res.status(201).json({ users: result });
+  } else {
+    res.status(401).json({ message: "Internal Error pls refresh" });
+  }
 });
 
 const getCurrentUserProfile = asyncHandler(async (req, res) => {

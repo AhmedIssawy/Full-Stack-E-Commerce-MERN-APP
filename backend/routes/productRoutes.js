@@ -32,7 +32,7 @@ router.route("/newest").get(getNewestProducts);
 router
   .route("/:id")
   .get(getSpeseficProduct)
-  .patch(authinticate, authorizeAdmin, formidable(), updateProduct)
+  .patch(authinticate, authorizeAdmin, formidable(), checkId, updateProduct)
   .delete(authinticate, authorizeAdmin, deleteProduct);
 
 router.route("/:id/reviews").post(authinticate, checkId, addProductReview);

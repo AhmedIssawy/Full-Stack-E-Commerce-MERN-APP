@@ -39,7 +39,7 @@ const AllProducts = () => {
       </div>
     );
   }
-  console.log(data);
+  // console.log(data);
 
   return (
     <div className="container mx-[9rem]">

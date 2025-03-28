@@ -71,7 +71,7 @@ const Navigation = () => {
       <div
         style={{ zIndex: 999 }}
         className={`fixed top-0 left-0 h-[100vh] bg-[#000] text-white p-5 flex-col justify-between
-        ${showSidebar ? "w-[10%]" : "w-[4%]"}
+        ${showSidebar ? "w-30" : "w-18"}
         `}
         id="navigation-container"
       >

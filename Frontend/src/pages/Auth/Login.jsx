@@ -14,19 +14,16 @@ const Login = () => {
   const navigate = useNavigate();
   const { userInfo } = useSelector((state) => state.auth);
 
-  const { search } = useLocation();
-  const sp = new URLSearchParams(search);
-  const redirect = sp.get("redirect") || "/";
-
   useEffect(() => {
     if (userInfo) {
-      navigate(redirect);
+      navigate("/");
     }
-  }, [navigate, redirect, userInfo]);
+  }, [userInfo]);
   const sibmitHandler = async (e) => {
     e.preventDefault();
     try {
       const res = await login({ email, password }).unwrap();
+      // console.log(res);
       dispatch(setCredientials({ ...res }));
       toast.success("Logged in successfully 👍", {
         theme: "dark",

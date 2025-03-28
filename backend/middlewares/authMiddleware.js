@@ -9,18 +9,15 @@ const authinticate = asyncHandler(async (req, res, next) => {
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
       // console.log(decoded);
-
-      req.user = await User.findById(decoded.userId).select("-password");
+      req.user = await User.findById(decoded.userId).select("-password -__v");
       next();
     } catch (error) {
-      res
-        .status(401)
-        .json({
-          message: "Unauthorized, token failed! try registering or login in.",
-        });
+      res.status(401).json({
+        error: "Unauthorized, token failed! try registering or login in.",
+      });
     }
   } else {
-    res.status(401).json({ message: "Not authoried, No token." });
+    res.status(401).json({ error: "Not authoried, Try loging in,  No token." });
   }
 });
 
@@ -28,7 +25,7 @@ const authorizeAdmin = async (req, res, next) => {
   if (req.user && req.user.isAdmin) {
     next();
   } else {
-    res.status(401).json({ message: "Not authorized as Admin." });
+    res.status(401).json({ error: "Not authorized as Admin." });
   }
 };
 

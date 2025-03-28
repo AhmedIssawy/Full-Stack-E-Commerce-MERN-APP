@@ -4,6 +4,8 @@ import Product from "../models/productModal.js";
 const addProduct = asyncHandler(async (req, res) => {
   try {
     const data = req.fields;
+    // console.log(req.user);
+    
 
     const product = new Product({
       ...data,

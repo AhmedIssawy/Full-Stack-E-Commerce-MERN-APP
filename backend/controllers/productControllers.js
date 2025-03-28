@@ -19,12 +19,10 @@ const addProduct = asyncHandler(async (req, res) => {
 
 const updateProduct = asyncHandler(async (req, res) => {
   try {
-    const { id } = req.params;
-    const product = await Product.findByIdAndUpdate(
-      id,
-      { ...req.fields },
-      { new: true }
-    );
+    const { id } = req.params
+    // console.log("Product req", req);
+    // console.log(req.fields);
+    await Product.findByIdAndUpdate(id, { ...req.fields }, { new: true });
     res.status(200).json({ message: "Product updated successfully!" });
   } catch (error) {
     console.error(error);
@@ -143,7 +141,7 @@ const getTopProducts = asyncHandler(async (req, res) => {
     console.error(error);
     res.status(400).json({ error: error.message });
   }
-})
+});
 
 const getNewestProducts = asyncHandler(async (req, res) => {
   try {
@@ -153,7 +151,7 @@ const getNewestProducts = asyncHandler(async (req, res) => {
     console.error(error);
     res.status(400).json({ error: error.message });
   }
-})
+});
 
 export {
   addProduct,

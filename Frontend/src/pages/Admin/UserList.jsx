@@ -37,10 +37,13 @@ const UserList = () => {
 
   const updateHandler = async (id) => {
     try {
-      await updateUser({
-        userId: id,
+      const userData = {
         username: editableUserName,
         email: editableUserEmail,
+      }
+      await updateUser({
+        userId: id,
+        data: userData
       }).unwrap();
       setEditableUserId(null);
       await refetch();
@@ -48,13 +51,14 @@ const UserList = () => {
         theme: "dark",
       });
     } catch (error) {
-      toast.error(error.data.message || error.message || "error");
+      console.error(error);
+      toast.error(error?.data?.message || error?.message || "error");
     }
   };
 
   useEffect(() => {
-      document.title = "Manage Users";
-    }, []);
+    document.title = "Manage Users";
+  }, []);
   return (
     <div className="p-4">
       <h1 className="text-2xl font-semibold mb-4">
@@ -106,7 +110,12 @@ const UserList = () => {
                           {user.username}
                           <button
                             onClick={() =>
-                              toggleEdit(user._id, user.username, user.email)
+                              toggleEdit(
+                                user._id,
+                                user.username,
+                                user.email,
+
+                              )
                             }
                           >
                             <FaEdit className="cursor-pointer" />
@@ -139,7 +148,12 @@ const UserList = () => {
                           {user.email}
                           <button
                             onClick={() =>
-                              toggleEdit(user._id, user.username, user.email)
+                              toggleEdit(
+                                user._id,
+                                user.username,
+                                user.email,
+
+                              )
                             }
                           >
                             <FaEdit className="cursor-pointer" />

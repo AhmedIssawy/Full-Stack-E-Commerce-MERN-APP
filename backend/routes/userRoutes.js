@@ -32,6 +32,6 @@ router
   .route("/:id")
   .delete(authinticate, authorizeAdmin, deleteUserById)
   .get(authinticate, authorizeAdmin, getUserById)
-  .put(authinticate, authorizeAdmin, updateUserById)
+  .patch(authinticate, authorizeAdmin, updateUserById)
 
 export default router;

@@ -63,7 +63,7 @@ const AdminMenu = () => {
           </li>
           <li>
             <NavLink
-              to={"/admin/productlist"}
+              to={"/admin/CreateProduct"}
               style={({ isActive }) => ({
                 border: isActive ? "#fff" : "#000",
               })}

@@ -144,7 +144,7 @@ const Navigation = () => {
                     </Link>
                   </li>
                   <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer select-none">
-                    <Link onClick={toggleDropdown} to="/admin/productlist">
+                    <Link onClick={toggleDropdown} to="/admin/CreateProduct">
                       Products
                     </Link>
                   </li>

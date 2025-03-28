@@ -6,7 +6,7 @@ import {
 import { useGetAllCategoriesQuery } from "../../redux/api/categoryApiSlice";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-const ProductList = () => {
+const CreateProduct = () => {
   const { data } = useGetAllCategoriesQuery();
 
   const [formData, setFormData] = useState({
@@ -28,28 +28,30 @@ const ProductList = () => {
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    // console.log(formData);
+    console.log(formData);
   };
 
   const uploadFileHandler = async (e) => {
+    //It can be better by not making 2 setFromData but it may have future errors
     const image = e.target.files[0];
     const fileData = new FormData();
     fileData.append("image", image);
 
     setFormData({
       ...formData,
-      image: e.target.files[0],
       imageUrl: URL.createObjectURL(image),
     });
 
-    useEffect(() => {
-      document.title = "Create Product";
-    }, []);
-
     try {
       const res = await uploadProductImage(fileData).unwrap();
-      // console.log(res);
-      setFormData({ ...formData, imageUrl: res.imageUrl });
+      // console.log("Response", res);
+      // console.log("Form data", formData);
+
+      setFormData({
+        ...formData,
+        image: res.imageUrl,
+        imageUrl: URL.createObjectURL(image),
+      });
 
       toast.success(res.message, { theme: "dark" });
     } catch (error) {
@@ -69,13 +71,13 @@ const ProductList = () => {
       productData.append("quantity", formData.quantity);
       productData.append("brand", formData.brand);
       productData.append("stock", formData.stock);
-      productData.append("image", formData.imageUrl);
+      productData.append("image", formData.image);
       const { data } = await createProduct(productData).unwrap();
       // console.log(data);
       toast.success(`${formData.name} is created successfully`, {
         theme: "dark",
       });
-      navigate("/admin/products");
+      navigate("/admin/allproductslist");
     } catch (error) {
       console.error(error);
       toast.error(error.data);
@@ -233,4 +235,4 @@ const ProductList = () => {
   );
 };
 
-export default ProductList;
+export default CreateProduct;

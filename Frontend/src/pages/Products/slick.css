@@ -1,0 +1,17 @@
+.slick-prev,
+.slick-next {
+  z-index: 10;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+  border-radius: 50%;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+.slick-prev::before,
+.slick-next::before {
+  font-size: 20px;
+  color: white; /* Make the arrow visible */
+}

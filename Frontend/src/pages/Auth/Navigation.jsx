@@ -16,7 +16,6 @@ import SideBarIcon from "../../components/SideBarIcon";
 import { FaHeart } from "react-icons/fa";
 import { TfiAlignJustify } from "react-icons/tfi";
 import { useNavigate } from "react-router-dom";
-import { SlLogout } from "react-icons/sl";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 
@@ -25,6 +24,8 @@ const Navigation = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const selector = useSelector((state) => state.favorites);
+
   const [logoutApiCall] = useLogoutMutation();
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -104,11 +105,12 @@ const Navigation = () => {
             showTitle={showSidebar}
           />
           <SideBarIcon
-            path={"/favorite"}
+            path={"/favorites"}
             title={"Favorite"}
             icon={FaHeart}
             rose={true}
             showTitle={showSidebar}
+            favCount={selector.length}
           />
         </div>
 
@@ -138,30 +140,35 @@ const Navigation = () => {
             {dropdownOpen &&
               (userInfo.isAdmin ? (
                 <ul className="absolute bottom-full left-0 mb-2 bg-white text-gray-800 shadow-lg rounded-lg py-2 w-40 border border-gray-300">
-                  <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer select-none">
-                    <Link onClick={toggleDropdown} to="/admin/dashboard">
-                      Dashboard
-                    </Link>
+                  <li
+                    onClick={toggleDropdown}
+                    className="px-4 py-2 hover:bg-gray-200 cursor-pointer select-none"
+                  >
+                    <Link to="/admin/dashboard">Dashboard</Link>
                   </li>
-                  <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer select-none">
-                    <Link onClick={toggleDropdown} to="/admin/CreateProduct">
-                      Products
-                    </Link>
+                  <li
+                    onClick={toggleDropdown}
+                    className="px-4 py-2 hover:bg-gray-200 cursor-pointer select-none"
+                  >
+                    <Link to="/admin/CreateProduct">Products</Link>
                   </li>
-                  <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer select-none">
-                    <Link onClick={toggleDropdown} to="/admin/categorylist">
-                      Category
-                    </Link>
+                  <li
+                    onClick={toggleDropdown}
+                    className="px-4 py-2 hover:bg-gray-200 cursor-pointer select-none"
+                  >
+                    <Link to="/admin/categorylist">Category</Link>
                   </li>
-                  <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer select-none">
-                    <Link onClick={toggleDropdown} to="/admin/orderlist">
-                      Orders
-                    </Link>
+                  <li
+                    onClick={toggleDropdown}
+                    className="px-4 py-2 hover:bg-gray-200 cursor-pointer select-none"
+                  >
+                    <Link to="/admin/orderlist">Orders</Link>
                   </li>
-                  <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer select-none">
-                    <Link onClick={toggleDropdown} to="/admin/userlist">
-                      Users
-                    </Link>
+                  <li
+                    onClick={toggleDropdown}
+                    className="px-4 py-2 hover:bg-gray-200 cursor-pointer select-none"
+                  >
+                    <Link to="/admin/userlist">Users</Link>
                   </li>
                   <li
                     className="px-4 py-2 hover:bg-gray-200 cursor-pointer select-none"

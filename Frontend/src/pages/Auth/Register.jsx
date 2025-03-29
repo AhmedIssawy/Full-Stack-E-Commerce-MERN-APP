@@ -178,6 +178,18 @@ const Register = () => {
               "Register"
             )}
           </button>
+          <label
+              htmlFor="rememberme"
+              className="inline-flex items-center mt-2 select-none cursor-pointer"
+            >
+              <input
+                type="checkbox"
+                name="rememberme"
+                id="rememberme"
+                className="form-checkbox cursor-pointer ml-5 h-5 w-5 text-blue-600 rounded-md border-gray-300 focus:ring-blue-500"
+              />
+              <span className="ml-2 text-sm text-gray-700">Remember me</span>
+            </label>
         </form>
 
         <div className="mt-4">
@@ -194,6 +206,7 @@ const Register = () => {
         alt="Beutiful image"
         className="h-[100vh] w-[59%] xl:block md:hidden sm:hidden"
         loading="lazy"
+        draggable="false"
       />
     </section>
   );

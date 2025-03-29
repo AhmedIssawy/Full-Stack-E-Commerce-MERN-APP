@@ -5,58 +5,72 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
-//Private Routes
-
+// Private Routes
 import PrivateRoute from "../components/PrivateRoute.jsx";
 import Profile from "../pages/User/Profile.jsx";
-//Error
 
+// Error
 import NotFound from "../pages/Error/NotFound.jsx";
 
 // Auth
 import Login from "../pages/Auth/Login.jsx";
 import Register from "../pages/Auth/Register.jsx";
 
+// Core
 import App from "../App.jsx";
-import SessionGuard from "../components/SessionGuard.jsx";
+import Home from "../Home.jsx";
 
-// Admin pages
+// Guards & Loader
+import SessionGuard from "../components/SessionGuard.jsx";
+import PageLoader from "../components/pageloader/PageLoader.jsx";
+
+// Admin Pages
 import AdminRoute from "../pages/Admin/AdminRoute.jsx";
 import UserList from "../pages/Admin/UserList.jsx";
 import CategoryList from "../pages/Admin/CategoryList.jsx";
 import CreateProduct from "../pages/Admin/CreateProduct.jsx";
 import ProductUpdate from "../pages/Admin/ProductUpdate.jsx";
 import AllProducts from "../pages/Admin/AllProducts.jsx";
-import PageLoader from "../components/pageloader/PageLoader.jsx";
+
+import ProductDetails from "../pages/Products/ProductDetails.jsx";
+import Favorites from "../pages/Products/Favorites.jsx";
 
 export const AppRoutes = () => {
   const routes = createRoutesFromElements(
-    <>
-      <Route path="/" element={<PageLoader />}>
-        <Route path="/" element={<SessionGuard />}>
-          <Route path="/" element={<App />}>
-            <Route path="*" element={<NotFound />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
+    // Top-level layout: PageLoader (must render <Outlet />)
+    <Route element={<PageLoader />}>
+      {/* Main layout */}
+      <Route path="/" element={<App />}>
+        {/* Public Routes */}
+        <Route index element={<Home />} />
+        <Route path="product/:id" element={<ProductDetails />} />
+        <Route path="*" element={<NotFound />} />
+        <Route path="/favorites" element={<Favorites />} />
 
-            {/* Private Routes */}
-            <Route path="" element={<PrivateRoute />}>
-              <Route path="/profile" element={<Profile />} />
-            </Route>
+        {/* Protected Routes */}
+        <Route element={<SessionGuard />}>
+          {/* Auth Routes */}
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
 
-            {/*Admin Routes */}
-            <Route path="/admin" element={<AdminRoute />}>
-              <Route path="userlist" element={<UserList />} />
-              <Route path="categorylist" element={<CategoryList />} />
-              <Route path="CreateProduct" element={<CreateProduct />} />
-              <Route path="allproductslist" element={<AllProducts />} />
-              <Route path="product/update/:_id" element={<ProductUpdate />} />
-            </Route>
+          {/* Private Routes */}
+          <Route element={<PrivateRoute />}>
+            <Route path="profile" element={<Profile />} />
+          </Route>
+
+          {/* Admin Routes */}
+          <Route path="admin" element={<AdminRoute />}>
+            <Route path="userlist" element={<UserList />} />
+            <Route path="categorylist" element={<CategoryList />} />
+            <Route path="createproduct" element={<CreateProduct />} />
+            <Route path="allproductslist" element={<AllProducts />} />
+            <Route path="product/update/:_id" element={<ProductUpdate />} />
           </Route>
         </Route>
       </Route>
-    </>
+    </Route>
   );
+
   const router = createBrowserRouter(routes);
   return <RouterProvider router={router} />;
 };

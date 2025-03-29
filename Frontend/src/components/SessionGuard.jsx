@@ -22,7 +22,7 @@ const SessionGuard = () => {
         navigate("/register");
         return;
       }
-      console.log("Date now", Date.now())
+      // console.log("Date now", Date.now())
       if (expirationTime && Date.now() > expirationTime) {
         dispatch(logout());
         clearCookies();
@@ -30,8 +30,6 @@ const SessionGuard = () => {
           theme: "dark",
           pauseOnHover: false,
         });
-        navigate("/login");
-      } else {
         navigate("/login");
       }
     };

@@ -59,7 +59,7 @@ const Login = () => {
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
-            <div className="my-[2rem]">
+            <div className="my-[2rem] ">
               <label
                 htmlFor="password"
                 className="block text-sm font-medium text-black"
@@ -86,6 +86,19 @@ const Login = () => {
                 "Sign in"
               )}
             </button>
+
+            <label
+              htmlFor="rememberme"
+              className="inline-flex items-center select-none mt-2 cursor-pointer"
+            >
+              <input
+                type="checkbox"
+                name="rememberme"
+                id="rememberme"
+                className="form-checkbox cursor-pointer ml-5 h-5 w-5 text-blue-600 rounded-md border-gray-300 focus:ring-blue-500"
+              />
+              <span className="ml-2 text-sm text-gray-700">Remember me</span>
+            </label>
           </form>
 
           <div className="mt-4">
@@ -101,6 +114,8 @@ const Login = () => {
           src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1964&q=80"
           alt=""
           className="h-[100vh] w-[59%] xl:block md:hidden sm:hidden "
+          draggable="false"
+          loading="lazy"
         />
       </section>
     </div>

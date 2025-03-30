@@ -10,10 +10,10 @@ const Home = () => {
   // console.log("Key word", keyword);
 
   const { data, isLoading, isError } = useGetPageOfProductsQuery();
-  console.log("Page of products", data);
+  // console.log("Page of products", data);
 
   useEffect(() => {
-    document.title = "Home";
+    document.title = "Buy Online At The Best Market";
   }, []);
   return (
     <>

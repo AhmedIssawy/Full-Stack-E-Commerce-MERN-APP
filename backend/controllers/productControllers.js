@@ -108,7 +108,7 @@ const addProductReview = asyncHandler(async (req, res) => {
     ) {
       res
         .status(400)
-        .json({ message: "You have already reviewed this product!" });
+        .json({ error: "You have already reviewed this product!" });
       return;
     }
 

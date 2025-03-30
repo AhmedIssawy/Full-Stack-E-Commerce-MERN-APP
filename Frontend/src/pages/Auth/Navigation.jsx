@@ -120,7 +120,9 @@ const Navigation = () => {
               onClick={toggleDropdown}
               className="cursor-pointer hover:scale-105 hover:text-blue-800 duration-300 select-none"
             >
-              {userInfo.username}
+              {!showSidebar
+                ? userInfo.username.substring(0, 5)
+                : userInfo.username}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className={`h-4 w-4 ml-1 `}

@@ -12,7 +12,7 @@ const App = () => {
   // console.log(userInfo);
 
   useEffect(() => {
-    document.title = "Vibe";
+    document.title = "Vibe: Buy Online";
   }, []);
   return (
     <>

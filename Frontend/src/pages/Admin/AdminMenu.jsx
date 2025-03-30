@@ -26,7 +26,7 @@ const AdminMenu = () => {
         )}
       </button>
       <section
-        className={`p-4 fixed right-7 top-5 transform transition-all duration-300 ${
+        className={`p-4 fixed z-50 right-7 top-5 transform transition-all duration-300 ${
           isMenuOpen
             ? "translate-x-0 opacity-100"
             : "translate-x-full opacity-0"

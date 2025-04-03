@@ -1,6 +1,18 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../app/features/cart/cartSlice";
 import HeartIcon from "./HeartIcon";
 const SmallProduct = ({ product }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  // console.log("H",product);
+  
+  const addToCartHandler = () => {
+    // console.log("added");
+    const qty = 1;
+    dispatch(addToCart({ ...product, qty }));
+    navigate("/cart");
+  };
   return (
     <div className="w-full sm:w-[300px] md:w-[250px] border border-gray-200 rounded-lg p-3 shadow-sm hover:shadow-md transition-transform  bg-white">
       <div className="relative">
@@ -13,7 +25,6 @@ const SmallProduct = ({ product }) => {
           />
         </Link>
         <HeartIcon product={product} />
-        
       </div>
 
       {/* Product Info */}
@@ -33,7 +44,10 @@ const SmallProduct = ({ product }) => {
         </div>
 
         {/* Button Section */}
-        <button className="mt-2 w-full cursor-pointer bg-yellow-500 text-black py-2 text-sm md:text-base rounded-md hover:bg-yellow-600 transition">
+        <button
+          onClick={addToCartHandler}
+          className="mt-2 w-full cursor-pointer bg-yellow-500 text-black py-2 text-sm md:text-base rounded-md hover:bg-yellow-600 transition"
+        >
           Add to Cart
         </button>
       </div>

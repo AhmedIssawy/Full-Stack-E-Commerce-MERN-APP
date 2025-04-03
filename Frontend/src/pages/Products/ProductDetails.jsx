@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import {
   useCreateReviewMutation,
   useGetSpeseficProductQuery,
   useGetTopProductsQuery,
-} from "../../redux/api/productApiSlice";
+} from "../../app/api/productApiSlice";
+import { addToCart } from "../../app/features/cart/cartSlice";
 import SkeletonID from "../../components/SkeletonID";
 import {
   FaBox,
@@ -23,25 +24,34 @@ import SmallProduct from "./SmallProduct";
 const ProductDetails = () => {
   const { id: productId } = useParams();
   const navigate = useNavigate();
-
+  //States
   const [qty, setQty] = useState(1);
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
+  // console.log("top Product", topProducts);
+
+  //Redux
+  const { userInfo } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const [createReview, { isLoading: loadingProductReview }] =
+    useCreateReviewMutation();
+
   const {
     data: product,
     isLoading,
     isError,
     refetch,
   } = useGetSpeseficProductQuery(productId);
+  
   const { data: topProducts, isLoading: loadingTopProducts } =
     useGetTopProductsQuery();
-  // console.log("top Product", topProducts);
 
-  const { userInfo } = useSelector((state) => state.auth);
-  const [createReview, { isLoading: loadingProductReview }] =
-    useCreateReviewMutation();
-  const addToCartHandler = async () => {
-    console.log("Added");
+  //Functions
+  const addToCartHandler = () => {
+    // console.log("added");
+
+    dispatch(addToCart({ ...product.product, qty }));
+    navigate("/cart");
   };
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -159,7 +169,7 @@ const ProductDetails = () => {
               <div className=" pt-2">
                 <button
                   onClick={addToCartHandler}
-                  disabled={!product.countInStock}
+                  disabled={!product.product.countInStock}
                   className="w-full md:w-auto cursor-pointer bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-3 px-6 rounded-lg shadow-md border border-yellow-600 transition duration-300 mt-4 md:mt-0"
                 >
                   Add to cart

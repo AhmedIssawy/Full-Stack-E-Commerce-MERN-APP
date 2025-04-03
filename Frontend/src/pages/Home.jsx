@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import { useGetPageOfProductsQuery } from "./redux/api/productApiSlice";
-import Header from "./components/Header";
-import SkeletonID from "./components/SkeletonID";
-import Message from "./pages/Admin/Message";
-import Product from "./pages/Products/Product";
+import { useGetPageOfProductsQuery } from "../app/api/productApiSlice";
+import Header from "../components/Header";
+import SkeletonID from "../components/SkeletonID";
+import Message from "./Admin/Message";
+import Product from "./Products/Product";
 const Home = () => {
   const { keyword } = useParams();
   // console.log("Key word", keyword);
@@ -22,7 +22,6 @@ const Home = () => {
         <SkeletonID />
       ) : isError ? (
         <Message variant={"danger"}>
-          {isError?.data.error || isError.error}
         </Message>
       ) : (
         <>

@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import {
   useCreateProductMutation,
   useUploadImageMutation,
-} from "../../redux/api/productApiSlice";
-import { useGetAllCategoriesQuery } from "../../redux/api/categoryApiSlice";
+} from "../../app/api/productApiSlice";
+import { useGetAllCategoriesQuery } from "../../app/api/categoryApiSlice";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 const CreateProduct = () => {

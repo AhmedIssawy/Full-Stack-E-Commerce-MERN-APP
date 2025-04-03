@@ -1,4 +1,4 @@
-import { useGetTopProductsQuery } from "../redux/api/productApiSlice.js";
+import { useGetTopProductsQuery } from "../app/api/productApiSlice.js";
 import SkeletonID from "../components/SkeletonID.jsx";
 import SmallProduct from "../pages/Products/SmallProduct.jsx";
 import ProductCarousel from "../pages/Products/ProductCarousel.jsx";

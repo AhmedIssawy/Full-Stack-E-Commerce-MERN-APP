@@ -1,11 +1,11 @@
+import mongoose from "mongoose";
 import asyncHandler from "../middlewares/asyncHandler.js";
-import Product from "../models/productModal.js";
+import Product from "../models/productModel.js";
 
 const addProduct = asyncHandler(async (req, res) => {
   try {
     const data = req.fields;
     // console.log(req.user);
-    
 
     const product = new Product({
       ...data,
@@ -21,7 +21,7 @@ const addProduct = asyncHandler(async (req, res) => {
 
 const updateProduct = asyncHandler(async (req, res) => {
   try {
-    const { id } = req.params
+    const { id } = req.params;
     // console.log("Product req", req);
     // console.log(req.fields);
     await Product.findByIdAndUpdate(id, { ...req.fields }, { new: true });
@@ -147,11 +147,30 @@ const getTopProducts = asyncHandler(async (req, res) => {
 
 const getNewestProducts = asyncHandler(async (req, res) => {
   try {
-    const products = await Product.find({}).sort({ createdAt: -1 }).limit(3);
+    const products = await Product.find({}).sort({ _id: -1 }).limit(3);
     res.status(200).json({ products });
   } catch (error) {
     console.error(error);
     res.status(400).json({ error: error.message });
+  }
+});
+
+const filterProducts = asyncHandler(async (req, res) => {
+  try {
+    const { checked, radio } = req.body;
+
+    let args = {};
+    if (checked.length > 0)
+      args.category = {
+        $in: checked.map((id) => new mongoose.Types.ObjectId(id)),
+      };
+    if (radio.length > 0) args.price = { $gte: radio[0], $lte: radio[1] };
+
+    const products = await Product.find(args);
+    res.status(200).json(products);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Server Error while filtiring" });
   }
 });
 
@@ -165,4 +184,5 @@ export {
   addProductReview,
   getTopProducts,
   getNewestProducts,
+  filterProducts,
 };

@@ -5,18 +5,16 @@ import {
   useDeleteProductMutation,
   useGetSpeseficProductQuery,
   useUploadImageMutation,
-} from "../../redux/api/productApiSlice";
-import { useGetAllCategoriesQuery } from "../../redux/api/categoryApiSlice";
+} from "../../app/api/productApiSlice";
+import { useGetAllCategoriesQuery } from "../../app/api/categoryApiSlice";
 import { toast } from "react-toastify";
-import { set } from "nprogress";
 
 const ProductUpdate = () => {
   const params = useParams();
   // console.log(params);
 
   const navigate = useNavigate();
-  const { data: product, isLoading } = useGetSpeseficProductQuery(params._id);
-  // console.log(product);
+  const { data, isLoading } = useGetSpeseficProductQuery(params._id);
   const [updateProduct] = useUpdateProductMutation();
   const [deleteProduct] = useDeleteProductMutation();
   const [uploadImage] = useUploadImageMutation();
@@ -115,19 +113,20 @@ const ProductUpdate = () => {
   useEffect(() => {
     if (product) {
       setUpdatingProductData({
-        name: product.product.name,
-        description: product.product.description,
-        price: product.product.price,
-        image: product.product.image,
-        quantity: product.product.quantity,
-        brand: product.product.brand,
-        stock: product.product.countInStock,
-        categoryId: product.product.categoryId,
+        name: product.name,
+        description: product.description,
+        price: product.price,
+        image: product.image,
+        quantity: product.quantity,
+        brand: product.brand,
+        stock: product.countInStock,
+        categoryId: product.categoryId,
       });
     }
-    setImageName(product?.product?.image?.split("/").pop());
+
+    setImageName(product?.image?.split("/").pop());
     // console.log(product);
-  }, [product]);
+  }, [data]);
 
   useEffect(() => {
     if (categories?.categories?.length > 0) {
@@ -191,10 +190,11 @@ const ProductUpdate = () => {
                   </div>
 
                   <div className="two">
-                    <label htmlFor="name block">Price</label> <br />
+                    <label htmlFor="price">Price</label> <br />
                     <input
                       type="number"
                       name="price"
+                      id="price"
                       className="p-4 mb-3 w-[30rem] border rounded-lg  text-white "
                       value={updatingProductData.price}
                       onChange={handleChange}
@@ -204,10 +204,11 @@ const ProductUpdate = () => {
 
                 <div className="flex flex-wrap">
                   <div>
-                    <label htmlFor="name block">Quantity</label> <br />
+                    <label htmlFor="quantity">Quantity</label> <br />
                     <input
                       type="number"
                       name="quantity"
+                      id="quantity"
                       min="1"
                       className="p-4 mb-3 w-[30rem] border rounded-lg  text-white mr-[5rem]"
                       value={updatingProductData.quantity}

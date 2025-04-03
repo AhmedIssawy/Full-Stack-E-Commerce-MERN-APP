@@ -1,9 +1,9 @@
 import { useRef, useState } from "react";
 import "./Navigation.css";
 import { useSelector, useDispatch } from "react-redux";
-import { useLoginMutation } from "../../redux/api/userApiSlice";
-import { useLogoutMutation } from "../../redux/api/userApiSlice";
-import { logout } from "../../redux/features/auth/authSlice";
+import { useLoginMutation } from "../../app/api/userApiSlice";
+import { useLogoutMutation } from "../../app/api/userApiSlice";
+import { logout } from "../../app/features/auth/authSlice";
 import {
   AiOutlineHome,
   AiOutlineShopping,
@@ -25,6 +25,8 @@ const Navigation = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const selector = useSelector((state) => state.favorites);
+  const { cartItems } = useSelector((state) => state.cart);
+  // console.log("GHHHH", cartItems.length);
 
   const [logoutApiCall] = useLogoutMutation();
 
@@ -95,14 +97,15 @@ const Navigation = () => {
           <SideBarIcon
             path={"/shop"}
             title={"Shop"}
-            icon={AiOutlineShoppingCart}
+            icon={AiOutlineShopping}
             showTitle={showSidebar}
           />
           <SideBarIcon
             path={"/cart"}
             title={"Cart"}
-            icon={AiOutlineShopping}
+            icon={AiOutlineShoppingCart}
             showTitle={showSidebar}
+            cartCount={cartItems.length}
           />
           <SideBarIcon
             path={"/favorites"}

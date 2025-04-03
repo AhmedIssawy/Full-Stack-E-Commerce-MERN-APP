@@ -1,13 +1,16 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { AppRoutes } from "./routes/AppRouter";
-import { store } from "./redux/store";
+import { store } from "./app/store";
 import { Provider } from "react-redux";
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <Provider store={store}>
-      <AppRoutes />
-    </Provider>
+    <PayPalScriptProvider>
+      <Provider store={store}>
+        <AppRoutes />
+      </Provider>
+    </PayPalScriptProvider>
   </StrictMode>
 );

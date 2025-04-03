@@ -3,7 +3,15 @@ import { AiOutlineHome } from "react-icons/ai";
 import { Link } from "react-router-dom";
 
 const SideBarIcon = React.memo(
-  ({ path, title, icon: Icon = AiOutlineHome, rose = false, showTitle, favCount }) => {
+  ({
+    path,
+    title,
+    icon: Icon = AiOutlineHome,
+    rose = false,
+    showTitle,
+    favCount,
+    cartCount,
+  }) => {
     return (
       <div className="relative">
         <Link
@@ -25,6 +33,13 @@ const SideBarIcon = React.memo(
           <div className="absolute left-4 top-2">
             <span className="px-2 py-1 text-sm text-white bg-pink-500 rounded-full">
               {favCount}
+            </span>
+          </div>
+        )}
+        {cartCount > 0 && (
+          <div className="absolute left-4 top-2">
+            <span className="px-2 py-1 text-sm text-white bg-blue-500 rounded-full">
+              {cartCount}
             </span>
           </div>
         )}

@@ -1,7 +1,7 @@
 import { Router } from "express";
 import formidable from "express-formidable";
 //Middlewares
-import { authinticate, authorizeAdmin } from "../middlewares/authMiddleWare.js";
+import { authinticate, authorizeAdmin } from "../middlewares/authMiddleware.js";
 import checkId from "../middlewares/checkId.js";
 
 //Controllers
@@ -15,6 +15,7 @@ import {
   addProductReview,
   getTopProducts,
   getNewestProducts,
+  filterProducts,
 } from "../controllers/productControllers.js";
 
 const router = Router();
@@ -28,6 +29,8 @@ router.route("/allproducts").get(getAllProducts);
 
 router.route("/top").get(getTopProducts);
 router.route("/newest").get(getNewestProducts);
+
+router.route("/filtered-products").post(filterProducts);
 
 router
   .route("/:id")

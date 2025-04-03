@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { FaEye, FaEyeSlash, FaSpinner } from "react-icons/fa";
 import { Link, redirect } from "react-router-dom";
-import { useRegisterMutation } from "../../redux/api/userApiSlice";
+import { useRegisterMutation } from "../../app/api/userApiSlice";
 import { useNavigate } from "react-router-dom";
-import { setCredientials } from "../../redux/features/auth/authSlice";
+import { setCredientials } from "../../app/features/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 const Register = () => {

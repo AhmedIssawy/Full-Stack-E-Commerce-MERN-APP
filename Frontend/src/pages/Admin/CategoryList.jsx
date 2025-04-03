@@ -4,7 +4,7 @@ import {
   useDeleteCategoryMutation,
   useGetAllCategoriesQuery,
   useUpdateCategoryMutation,
-} from "../../redux/api/categoryApiSlice";
+} from "../../app/api/categoryApiSlice";
 //components
 import CategoryForm from "../../components/CategoryForm";
 import Modal from "../../components/Modal";

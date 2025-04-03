@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useLoginMutation } from "../../redux/api/userApiSlice";
-import { setCredientials } from "../../redux/features/auth/authSlice";
+import { useLoginMutation } from "../../app/api/userApiSlice";
+import { setCredientials } from "../../app/features/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaSpinner } from "react-icons/fa";

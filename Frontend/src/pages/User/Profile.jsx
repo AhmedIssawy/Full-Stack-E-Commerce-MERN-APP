@@ -1,7 +1,7 @@
-import { useProfileMutation } from "../../redux/api/userApiSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { useProfileMutation } from "../../app/api/userApiSlice";
 import { toast } from "react-toastify";
-import { setCredientials } from "../../redux/features/auth/authSlice";
+import { setCredientials } from "../../app/features/auth/authSlice";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { FaSpinner } from "react-icons/fa";

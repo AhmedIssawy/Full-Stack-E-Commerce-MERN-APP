@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Ratings from "./Ratings";
-import { useGetTopProductsQuery } from "../../redux/api/productApiSlice";
+import { useGetTopProductsQuery } from "../../app/api/productApiSlice";
 import SkeletonID from "../../components/SkeletonID";
 import moment from "moment";
 const ProductTabs = ({
@@ -95,7 +95,7 @@ const ProductTabs = ({
                 <button
                   type="submit"
                   disabled={loadingProductReview}
-                  className="w-full md:w-auto cursor-pointer bg-pink-500 hover:bg-pink-600 text-black font-bold py-3 px-6 rounded-lg shadow-md border border-pink-600 transition duration-300 mt-4 md:mt-0"
+                  className="w-full mb-5 md:w-auto cursor-pointer bg-pink-500 hover:bg-pink-600 text-black font-bold py-3 px-6 rounded-lg shadow-md border border-pink-600 transition duration-300 mt-4 md:mt-0"
                 >
                   Submit
                 </button>

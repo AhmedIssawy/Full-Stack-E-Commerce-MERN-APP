@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import moment from "moment";
 import SkeletonID from "../../components/SkeletonID";
-import { useGetAllProductsQuery } from "../../redux/api/productApiSlice";
-import { useDeleteProductMutation } from "../../redux/api/productApiSlice";
+import { useGetAllProductsQuery } from "../../app/api/productApiSlice";
+import { useDeleteProductMutation } from "../../app/api/productApiSlice";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 

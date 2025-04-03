@@ -3,14 +3,14 @@ import { FaTrash, FaEdit, FaCheck, FaTimes, FaSpinner } from "react-icons/fa";
 import { toast } from "react-toastify";
 import Message from "./Message";
 import {
-  useGetUsersQuery,
+  useGetAllUsersQuery,
   useDeleteUserMutation,
   useGetUsersDetailsQuery,
   useUpdateUserMutation,
-} from "../../redux/api/userApiSlice";
+} from "../../app/api/userApiSlice";
 import { RiAdminFill } from "react-icons/ri";
 const UserList = () => {
-  const { data, refetch, isLoading, error } = useGetUsersQuery();
+  const { data, refetch, isLoading, error } = useGetAllUsersQuery();
   const [deleteUser] = useDeleteUserMutation();
   const [updateUser] = useUpdateUserMutation();
   const [editableUserId, setEditableUserId] = useState(null);

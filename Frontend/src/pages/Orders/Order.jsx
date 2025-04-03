@@ -22,7 +22,7 @@ const Order = () => {
     error,
   } = useGetOrderDetailsQuery(orderId);
   const navigate = useNavigate();
-  console.log(order);
+  // console.log(order);
 
   const [payOrder, { isLoading: loadingPay }] = usePayOrderMutation();
   const [deliverOrder, { isLoading: loadingDeliver }] =

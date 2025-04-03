@@ -3,10 +3,10 @@ import express from "express";
 import path from "path";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
-// import helmet from "helmet";
+import helmet from "helmet";
 import cors from "cors";
-// import csurf from "csurf"
-// import ratelimit, { rateLimit } from "express-rate-limit";
+import csurf from "csurf"
+import ratelimit, { rateLimit } from "express-rate-limit";
 
 //Utils
 import connectDB from "./config/db.js";
@@ -30,9 +30,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(cors({ origin: "http://localhost:5173" }));
 // app.use(csurf({ cookie: true }));
-// app.use(helmet());
-// const limiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 100 });
-// app.use(limiter); ///////   uncomment in production
+app.use(helmet());
+const limiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 100 });
+app.use(limiter); ///////   uncomment in production
 
 app.use("/api/users", userRoutes);
 app.use("/api/categories", categoryRoutes);

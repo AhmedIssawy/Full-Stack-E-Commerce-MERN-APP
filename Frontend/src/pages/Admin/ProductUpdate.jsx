@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import  {useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   useUpdateProductMutation,
@@ -11,17 +11,17 @@ import { toast } from "react-toastify";
 
 const ProductUpdate = () => {
   const params = useParams();
-  // console.log(params);
-
   const navigate = useNavigate();
   const { data, isLoading } = useGetSpeseficProductQuery(params._id);
+  console.log(data);
+  
   const [updateProduct] = useUpdateProductMutation();
   const [deleteProduct] = useDeleteProductMutation();
   const [uploadImage] = useUploadImageMutation();
   const { data: categories = [], isLoading: isLoadingCategories } =
     useGetAllCategoriesQuery();
-  // console.log(`Category id`, categories.categories[0]._id);
-  const [updatingProductData, setUpdatingProductData] = React.useState({
+
+  const [updatingProductData, setUpdatingProductData] = useState({
     name: "",
     description: "",
     price: "",
@@ -32,7 +32,7 @@ const ProductUpdate = () => {
     brand: "",
     stock: "",
   });
-  const [imageName, setImageName] = React.useState("");
+  const [imageName, setImageName] = useState("");
 
   const handleChange = (e) => {
     setUpdatingProductData((prev) => ({
@@ -62,13 +62,12 @@ const ProductUpdate = () => {
 
   const handleDelete = async () => {
     try {
-      let answer = window.confirm(
+      const answer = window.confirm(
         "Are you sure you want to delete this product?"
       );
       if (!answer) return;
-      const res = await deleteProduct(params._id).unwrap();
-      // console.log(res);
-      toast.success(`Product is deleted successfully!`, {
+      await deleteProduct(params._id).unwrap();
+      toast.success("Product is deleted successfully!", {
         theme: "dark",
         pauseOnHover: false,
       });
@@ -97,7 +96,6 @@ const ProductUpdate = () => {
         productId: params._id,
         data: formData,
       }).unwrap();
-      // console.log(typeof(params._id));
       toast.success("Product updated successfully", {
         theme: "dark",
         pauseOnHover: false,
@@ -110,22 +108,21 @@ const ProductUpdate = () => {
       });
     }
   };
-  useEffect(() => {
-    if (product) {
-      setUpdatingProductData({
-        name: product.name,
-        description: product.description,
-        price: product.price,
-        image: product.image,
-        quantity: product.quantity,
-        brand: product.brand,
-        stock: product.countInStock,
-        categoryId: product.categoryId,
-      });
-    }
 
-    setImageName(product?.image?.split("/").pop());
-    // console.log(product);
+  useEffect(() => {
+    if (data) {
+      setUpdatingProductData({
+        name: data?.product?.name,
+        description: data?.product?.description,
+        price: data?.product?.price,
+        image: data?.product?.image,
+        quantity: data?.product?.quantity,
+        brand: data?.product?.brand,
+        stock: data?.product?.countInStock,
+        category: data?.product?.category,
+      });
+      setImageName(data?.product?.image?.split("/").pop() || "");
+    }
   }, [data]);
 
   useEffect(() => {
@@ -139,11 +136,12 @@ const ProductUpdate = () => {
 
   useEffect(() => {
     document.title = "Update product";
-  }, [categories]);
+  }, []);
+
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <div className="container  xl:mx-[9rem] sm:mx-[0]">
+        <div className="container xl:mx-[9rem] sm:mx-[0]">
           <div className="flex flex-col md:flex-row">
             <div className="md:w-3/4 p-3">
               <div className="text-2xl mb-5 font-bold text-black bg-gradient-to-r py-3 px-5 rounded-lg shadow-md">
@@ -151,7 +149,7 @@ const ProductUpdate = () => {
               </div>
 
               {updatingProductData?.image && (
-                <div className="text-center ">
+                <div className="text-center">
                   <img
                     src={updatingProductData.image}
                     name="image"
@@ -162,7 +160,7 @@ const ProductUpdate = () => {
               )}
 
               <div className="mb-3 cursor-pointer rounded relative">
-                <label className="text-white py-2 px-4  mt-5 block w-full text-center rounded-lg cursor-pointer font-bold bg-gradient-to-r from-blue-600 to-blue-500 hover:bg-gradient-to-l">
+                <label className="text-white py-2 px-4 mt-5 block w-full text-center rounded-lg cursor-pointer font-bold bg-gradient-to-r from-blue-600 to-blue-500 hover:bg-gradient-to-l">
                   {updatingProductData.image
                     ? imageName + " (Uploaded)"
                     : "Upload image"}
@@ -171,7 +169,7 @@ const ProductUpdate = () => {
                     name="image"
                     accept="image/*"
                     onChange={uploadImageHandler}
-                    className="hidden " // This hides the default file input
+                    className="hidden"
                   />
                 </label>
               </div>
@@ -179,23 +177,25 @@ const ProductUpdate = () => {
               <div className="p-3">
                 <div className="flex flex-wrap">
                   <div className="one">
-                    <label htmlFor="name">Name</label> <br />
+                    <label htmlFor="name">Name</label>
+                    <br />
                     <input
                       type="text"
                       name="name"
-                      className="p-4 mb-3 w-[30rem] border rounded-lg  text-white mr-[5rem]"
+                      className="p-4 mb-3 w-[30rem] border rounded-lg text-white mr-[5rem]"
                       value={updatingProductData.name}
                       onChange={handleChange}
                     />
                   </div>
 
                   <div className="two">
-                    <label htmlFor="price">Price</label> <br />
+                    <label htmlFor="price">Price</label>
+                    <br />
                     <input
                       type="number"
                       name="price"
                       id="price"
-                      className="p-4 mb-3 w-[30rem] border rounded-lg  text-white "
+                      className="p-4 mb-3 w-[30rem] border rounded-lg text-white"
                       value={updatingProductData.price}
                       onChange={handleChange}
                     />
@@ -204,59 +204,63 @@ const ProductUpdate = () => {
 
                 <div className="flex flex-wrap">
                   <div>
-                    <label htmlFor="quantity">Quantity</label> <br />
+                    <label htmlFor="quantity">Quantity</label>
+                    <br />
                     <input
                       type="number"
                       name="quantity"
                       id="quantity"
                       min="1"
-                      className="p-4 mb-3 w-[30rem] border rounded-lg  text-white mr-[5rem]"
+                      className="p-4 mb-3 w-[30rem] border rounded-lg text-white mr-[5rem]"
                       value={updatingProductData.quantity}
                       onChange={handleChange}
                     />
                   </div>
                   <div>
-                    <label htmlFor="name block">Brand</label> <br />
+                    <label htmlFor="brand">Brand</label>
+                    <br />
                     <input
                       type="text"
                       name="brand"
-                      className="p-4 mb-3 w-[30rem] border rounded-lg  text-white "
+                      className="p-4 mb-3 w-[30rem] border rounded-lg text-white"
                       value={updatingProductData.brand}
                       onChange={handleChange}
                     />
                   </div>
                 </div>
 
-                <label htmlFor="" className="my-5">
+                <label htmlFor="description" className="my-5">
                   Description
                 </label>
                 <textarea
-                  type="text"
                   name="description"
                   rows="5"
-                  className="p-2 mb-3   border rounded-lg w-[95%] text-white"
+                  className="p-2 mb-3 border rounded-lg w-[95%] text-white"
                   value={updatingProductData.description}
                   onChange={handleChange}
                 />
 
                 <div className="flex justify-between">
                   <div>
-                    <label htmlFor="name block">Count In Stock</label> <br />
+                    <label htmlFor="stock">Count In Stock</label>
+                    <br />
                     <input
                       type="text"
                       name="stock"
-                      className="p-4 mb-3 w-[30rem] border rounded-lg  text-white "
+                      id="stock"
+                      className="p-4 mb-3 w-[30rem] border rounded-lg text-white"
                       value={updatingProductData.stock}
                       onChange={handleChange}
                     />
                   </div>
 
                   <div>
-                    <label>Category</label> <br />
+                    <label htmlFor="categoryId">Category</label>
+                    <br />
                     <select
                       name="categoryId"
+                      id="categoryId"
                       value={updatingProductData.categoryId}
-                      placeholder="Choose Category"
                       className="p-4 mb-3 w-[30rem] rounded-lg border mr-[5rem]"
                       onChange={handleChange}
                     >
@@ -269,7 +273,7 @@ const ProductUpdate = () => {
                   </div>
                 </div>
 
-                <div className="">
+                <div>
                   <button
                     type="submit"
                     className="py-4 px-10 cursor-pointer rounded-2xl border border-red-500 bg-gradient-to-r from-green-600 to-green-500 text-white font-semibold shadow-lg transition-all duration-300 hover:scale-105 active:scale-95 focus:outline-none focus:ring-4 focus:ring-red-400/50 mr-6"

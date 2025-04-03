@@ -30,7 +30,7 @@ const Cart = () => {
       <div className="container flex justify-around items-start flex-wrap mx-auto mt-8">
         {cartItems.length === 0 ? (
           <div>
-            Your cart is empty <Link to="/shop">Go To Shop</Link>
+            Your cart is empty <Link className="underline" to="/shop">Go To Shop</Link>
           </div>
         ) : (
           <>
@@ -103,7 +103,6 @@ const Cart = () => {
 
                   <button
                     className="bg-pink-500 cursor-pointer mt-4 py-2 px-4 rounded-full text-lg w-full"
-                    disabled={cartItems.length === 0}
                     onClick={checkoutHandler}
                   >
                     Proceed To Checkout

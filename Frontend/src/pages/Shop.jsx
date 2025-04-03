@@ -39,7 +39,7 @@ const Shop = () => {
   useEffect(() => {
     if (!checked.length || !radio.length) {
       if (!filteredProductsQuery.isLoading) {
-        const filteredProducts = filteredProductsQuery.data.filter(
+        const filteredProducts = filteredProductsQuery?.data?.filter(
           (product) => {
             return (
               product.price.toString().includes(priceFilter) ||
@@ -50,9 +50,9 @@ const Shop = () => {
         dispatch(setProducts(filteredProducts));
       }
     }
-  }, [checked, radio, filteredProductsQuery.data, dispatch, priceFilter]);
+  }, [checked, radio, filteredProductsQuery?.data, dispatch, priceFilter]);
   const handleBrandClick = (brand) => {
-    const productsByBrand = filteredProductsQuery.data?.filter(
+    const productsByBrand = filteredProductsQuery?.data.filter(
       (product) => product.brand === brand
     );
     dispatch(setProducts(productsByBrand));
@@ -69,7 +69,7 @@ const Shop = () => {
       new Set(
         filteredProductsQuery.data
           ?.map((product) => product.brand)
-          .filter((brand) => brand !== undefined)
+          ?.filter((brand) => brand !== undefined)
       )
     ),
   ];

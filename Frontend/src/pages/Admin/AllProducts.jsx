@@ -12,10 +12,7 @@ const AllProducts = () => {
   // console.log(data);
 
   const handleDelete = async (e) => {
-    let answer = window.confirm(
-      "Are you sure you want to delete this product?"
-    );
-    if (!answer) return;
+    
 
     await deleteProduct(e.target.value);
     refetch();
@@ -27,7 +24,7 @@ const AllProducts = () => {
   useEffect(() => {
     document.title = "All Products Management";
     refetch();
-  }, [data]);
+  }, [data?.products]);
 
   if (isLoading) {
     return (
@@ -50,7 +47,7 @@ const AllProducts = () => {
           </h1>
           <div className="flex flex-wrap justify-around items-center ">
             {data?.products?.map((product) => (
-              <div className="block mb-4 overflow-hidden mr-7 border shadow-md ">
+              <div key={product._id} className="block mb-4 overflow-hidden mr-7 border shadow-md ">
                 <div className="flex">
                   <img
                     src={product.image}

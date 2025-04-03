@@ -56,7 +56,6 @@ const ProductCarousel = () => {
                   <h2 className="text-2xl  font-bold text-gray-800">
                     {product.name}
                   </h2>
-                  <span className="text-red-700 font-bold text-2xl">TOP SALES</span>
                 </div>
                 <p className="text-xl text-green-600 font-semibold mt-1">
                   ${product.price}

@@ -2,13 +2,10 @@ import Chart from "react-apexcharts";
 import { useGetAllUsersQuery } from "../../app/api/userApiSlice";
 import {
   useGetAllOrdersQuery,
-  useGetTotalOrdersQuery,
   useGetTotalSalesByDateQuery,
   useGetTotalSalesQuery,
 } from "../../app/api/orderApiSlice";
 import { useState, useEffect } from "react";
-import OrderList from "./OrderList";
-import SkeletonID from "../../components/SkeletonID";
 const AdminDashboard = () => {
   const { data: sales, isLoading } = useGetTotalSalesQuery();
   const { data: customers, isLoading: loadingUsers } = useGetAllUsersQuery();
@@ -23,7 +20,7 @@ const AdminDashboard = () => {
       chart: { 
         type: "line", 
         height: 300,
-        background: "#2d224b", // Dark background
+        background: "#2d224b", 
       },
       tooltip: { theme: "light" },
       colors: ["#00E396"],

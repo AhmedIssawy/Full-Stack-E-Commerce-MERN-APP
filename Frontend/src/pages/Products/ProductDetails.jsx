@@ -169,7 +169,7 @@ const ProductDetails = () => {
               <div className=" pt-2">
                 <button
                   onClick={addToCartHandler}
-                  disabled={!product.product.countInStock}
+
                   className="w-full md:w-auto cursor-pointer bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-3 px-6 rounded-lg shadow-md border border-yellow-600 transition duration-300 mt-4 md:mt-0"
                 >
                   Add to cart
@@ -184,7 +184,7 @@ const ProductDetails = () => {
                 {loadingProductReview ? (
                   <SkeletonID />
                 ) : (
-                  topProducts.products.map((product) => (
+                  topProducts?.products?.map((product) => (
                     <div key={product._id} className="mr-5">
                       <SmallProduct product={product} />
                     </div>

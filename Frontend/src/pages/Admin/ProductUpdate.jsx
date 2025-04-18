@@ -119,7 +119,7 @@ const ProductUpdate = () => {
         quantity: data?.product?.quantity,
         brand: data?.product?.brand,
         stock: data?.product?.countInStock,
-        category: data?.product?.category,
+        category: data?.product?.category || "Computers",
       });
       setImageName(data?.product?.image?.split("/").pop() || "");
     }

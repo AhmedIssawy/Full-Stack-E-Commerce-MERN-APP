@@ -16,7 +16,7 @@ const Header = () => {
       </>
     );
   }
-//   console.log("Top Products", data);
+  console.log("Top Products", data);
 
   return (
     <>

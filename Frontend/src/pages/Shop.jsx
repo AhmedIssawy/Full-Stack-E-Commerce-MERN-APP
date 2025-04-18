@@ -51,6 +51,7 @@ const Shop = () => {
       }
     }
   }, [checked, radio, filteredProductsQuery?.data, dispatch, priceFilter]);
+  
   const handleBrandClick = (brand) => {
     const productsByBrand = filteredProductsQuery?.data.filter(
       (product) => product.brand === brand

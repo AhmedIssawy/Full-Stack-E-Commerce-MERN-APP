@@ -45,7 +45,7 @@ A full-stack e-commerce web application built with the MERN stack. It offers a s
 
 ```bash
 git clone https://github.com/your-username/your-repo-name.git
-cd your-repo-name
+cd Full-Stack-E-Commerce-MERN-APP
 ```
 # 2. Set Up Environment Variables
 Create a .env file in both /frontend and /backend with your configuration like:

@@ -95,14 +95,14 @@ npm install
 And more... [Video for clarifying](https://drive.google.com/file/d/1yxQb-9KpTvIgudCj7gLD2PHKdQd6P6sQ/view?usp=sharing)
 
 ## Suggestions
-Add stripe its already configured for it
-Mobile app version (React Native)
-Real-time order status updates with WebSockets
+- Add stripe its already configured for it
+- Mobile app version (React Native)
+- Real-time order status updates with WebSockets
 
 👨‍💻 Author
-Ahmed Issawy
-📍 Cairo, Egypt
-🔗 [LinkedIn](https://www.linkedin.com/in/ahmed-issawy-53b29528b/)
+- Ahmed Issawy
+- 📍 Cairo, Egypt
+- 🔗 [LinkedIn](https://www.linkedin.com/in/ahmed-issawy-53b29528b/)
 
 📄 License
 U can use the project for any thing

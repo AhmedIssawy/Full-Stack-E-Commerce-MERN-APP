@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import helmet from "helmet";
 import cors from "cors";
-import csurf from "csurf"
+import csurf from "csurf";
 import ratelimit, { rateLimit } from "express-rate-limit";
 
 //Utils
@@ -24,11 +24,29 @@ const port = process.env.PORT || 5000;
 const __dirname = path.resolve();
 
 const app = express();
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://127.0.0.1:5173",
+  "http://localhost",
+  "https://your-vercel-domain.vercel.app", // Change when prod
+];
 
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      // Allow requests with no origin (like mobile apps, curl, Postman)
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("CORS not allowed for this origin"));
+      }
+    },
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(cors({ origin: "http://localhost:5173" }));
 // app.use(csurf({ cookie: true }));
 app.use(helmet());
 const limiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 100 });

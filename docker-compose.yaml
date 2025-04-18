@@ -1,0 +1,70 @@
+name: mern-app
+
+services:
+  mongo:
+    image: mongo
+    restart: always
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - mern-app
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: always
+    volumes:
+      - mongo_data:/app/backend
+      - node_modules:/app/backend/node_modules
+    ports:
+      - "5000:5000"
+    networks:
+      - mern-app
+    environment:
+      - NODE_ENV=development
+      - DATABASE_URL=mongodb://mongo:27017/store
+      - JWT_SECRET=ahmed
+      - JWT_EXPIRES_IN=30d
+      - PORT=5000
+
+    depends_on:
+      - mongo
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    volumes:
+      - ./frontend:/app/frontend
+      - /app/frontend/node_modules
+    networks:
+      - mern-app
+    ports:
+      - "5173:5173"
+    command: npm run dev -- --host
+    environment:
+      - NODE_ENV=production
+    depends_on:
+      - api
+  caddy:
+    image: caddy:2-alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      - mern-app
+    depends_on:
+      - api
+      - frontend
+    
+
+volumes:
+  mongo_data:
+  node_modules:
+  caddy_data:
+  caddy_config:
+networks:
+  mern-app:
+    driver: bridge

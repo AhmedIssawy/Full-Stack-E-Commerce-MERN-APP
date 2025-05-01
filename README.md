@@ -3,7 +3,7 @@
 
 # 🛒 MERN E-commerce Platform
 
-A full-stack e-commerce web application built with the MERN stack. It offers a seamless shopping experience with full inventory management, secure authentication, and support for PayPal and bank payments.
+A full-stack e-commerce web application built with the MERN stack. It offers a seamless shopping experience with full inventory management, secure authentication, and support for PayPal and bank payments. 
 
 ## ✨ Features
 

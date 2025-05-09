@@ -54,15 +54,17 @@ Create a .env file in both /frontend and /backend with your configuration like:
 ```bash
 PORT=5000
 NODE_ENV=development
-DATABASE_URL=your_mongo_uri
-JWT_SECRET=your_jwt_secret
+MONGO_URI="your_mongo_uri"
+JWT_SECRET="your_jwt_secret"
 JWT_EXPIRE=30d
+CLIENT_URL="your-client-url"
 PAYPAL_CLIENT_ID=your_paypal_id
-REDIS_URL=redis://localhost:6379
+REDIS_URL="your-redis-url"
 ```
 # Do this env for front end
 ```bash
 NODE_ENV=development
+VITE_SERVER_URL="your-server-url"
 ```
 
 # 3. Install Dependencies

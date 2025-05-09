@@ -116,7 +116,7 @@ And more... [Video for clarifying](https://drive.google.com/file/d/1yxQb-9KpTvIg
 - Real-time order status updates with WebSockets
 
 👨‍💻 Author
-- Ahmed Issawy
+- 👨‍💻 Ahmed Issawy
 - 📍 Cairo, Egypt
 - 🔗 [LinkedIn](https://www.linkedin.com/in/ahmed-issawy-53b29528b/)
 

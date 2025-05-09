@@ -5,7 +5,7 @@
 
 A full-stack e-commerce web application built with the MERN stack. It offers a seamless shopping experience with full inventory management, secure authentication, and support for PayPal and bank payments. 
 
-## ✨ Features
+## ✨ Features 
 
 - 🛍️ Product browsing and search
 - 🛒 Shopping cart with quantity adjustments

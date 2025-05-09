@@ -1,7 +1,10 @@
 import mongoose from "mongoose";
 import asyncHandler from "../middlewares/asyncHandler.js";
 import Product from "../models/productModel.js";
+import { redisClient } from "../config/redis.js";
 
+const anHour = 60 * 60;
+const aDay = 60 * 60 * 24;
 const addProduct = asyncHandler(async (req, res) => {
   try {
     const data = req.fields;
@@ -10,8 +13,8 @@ const addProduct = asyncHandler(async (req, res) => {
     const product = new Product({
       ...data,
     });
-
     await product.save();
+    await redisClient.del("store:products");
     res.status(201).json({ message: "Product added successfully!" });
   } catch (error) {
     console.error(error);
@@ -25,6 +28,7 @@ const updateProduct = asyncHandler(async (req, res) => {
     // console.log("Product req", req);
     // console.log(req.fields);
     await Product.findByIdAndUpdate(id, { ...req.fields }, { new: true });
+    await redisClient.del("store:products");
     res.status(200).json({ message: "Product updated successfully!" });
   } catch (error) {
     console.error(error);
@@ -36,6 +40,7 @@ const deleteProduct = asyncHandler(async (req, res) => {
   try {
     const { id } = req.params;
     await Product.findByIdAndDelete(id);
+    await redisClient.del("store:products");
     res.status(200).json({ message: "Product deleted successfully!" });
   } catch (error) {
     console.error(error);
@@ -85,10 +90,15 @@ const getSpeseficProduct = asyncHandler(async (req, res) => {
 
 const getAllProducts = asyncHandler(async (req, res) => {
   try {
+    const cachedProducts = await redisClient.get("store:products");
+    if (cachedProducts) {
+      return res.status(200).json({ products: JSON.parse(cachedProducts) });
+    }
+
     const products = await Product.find({})
       .populate("category")
       .sort({ createdAt: -1 });
-
+    await redisClient.setEx("store:products", anHour, JSON.stringify(products));
     res.status(200).json({ products });
   } catch (error) {
     console.error(error);
@@ -126,7 +136,7 @@ const addProductReview = asyncHandler(async (req, res) => {
       product.reviews.length;
 
     await product.save();
-
+    await redisClient.del("store:products");
     res.status(201).json({ message: "Review added successfully!" });
   } catch (error) {
     console.error(error);
@@ -136,7 +146,12 @@ const addProductReview = asyncHandler(async (req, res) => {
 
 const getTopProducts = asyncHandler(async (req, res) => {
   try {
+    const cachedProducts = await redisClient.get("topProducts");
+    if (cachedProducts) {
+      return res.status(200).json({ products: JSON.parse(cachedProducts) });
+    }
     const products = await Product.find({}).sort({ rating: -1 }).limit(3);
+    await redisClient.setEx("topProducts", aDay, JSON.stringify(products));
     res.status(200).json({ products });
   } catch (error) {
     console.error(error);
@@ -146,7 +161,12 @@ const getTopProducts = asyncHandler(async (req, res) => {
 
 const getNewestProducts = asyncHandler(async (req, res) => {
   try {
+    const cachedProducts = await redisClient.get("newestProducts");
+    if (cachedProducts) {
+      return res.status(200).json({ products: JSON.parse(cachedProducts) });
+    }
     const products = await Product.find({}).sort({ _id: -1 }).limit(3);
+    await redisClient.setEx("newestProducts", 60, JSON.stringify(products));
     res.status(200).json({ products });
   } catch (error) {
     console.error(error);

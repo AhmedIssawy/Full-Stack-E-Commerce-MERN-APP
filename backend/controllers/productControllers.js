@@ -50,6 +50,10 @@ const deleteProduct = asyncHandler(async (req, res) => {
 
 const getPageOfProducts = asyncHandler(async (req, res) => {
   try {
+    const cachedProducts = await redisClient.get("store:products:filtered");
+    if (cachedProducts) {
+      return res.status(200).json({ products: JSON.parse(cachedProducts) });
+    }
     const pageSize = 6;
     const page = Number(req.query.page) || 1;
     const keyword = req.query.keyword
@@ -62,6 +66,12 @@ const getPageOfProducts = asyncHandler(async (req, res) => {
       : {};
     const count = await Product.countDocuments({ ...keyword });
     const products = await Product.find({ ...keyword }).limit(pageSize);
+    await redisClient.setEx(
+      "store:products:filtered",
+      aDay,
+      JSON.stringify(products)
+    );
+
     res.status(200).json({
       products,
       page,

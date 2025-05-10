@@ -1,10 +1,7 @@
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { AiOutlineShoppingCart } from "react-icons/ai";
-import { useGetAllProductsQuery } from "../../app/api/productApiSlice";
-import { addToCart } from "../../app/features/cart/cartSlice";
-import { useEffect } from "react";
-import SmallProduct from "./SmallProduct"
+
 import HeartIcon from "./HeartIcon";
 const ProductCart = ({ product }) => {
   const dispatch = useDispatch();

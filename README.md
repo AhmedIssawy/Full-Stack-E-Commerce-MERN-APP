@@ -1,9 +1,9 @@
 - [Video for clarifying](https://drive.google.com/file/d/1yxQb-9KpTvIgudCj7gLD2PHKdQd6P6sQ/view?usp=sharing)
 - [POST MAN LINK](https://ai7777-7249.postman.co/workspace/E-Commerce~0ef9f903-b1d6-4345-adbc-e25c660a2208/collection/39355421-256af78b-2f60-4fef-a517-749934029e3e?action=share&creator=39355421)
 
-# 🛒 MERN E-commerce Platform
+# 🛒 E-commerce Platform
 
-A full-stack e-commerce web application built with the MERN stack. It offers a seamless shopping experience with full inventory management, secure authentication, and support for PayPal and bank payments. 
+A full-stack e-commerce web application. It offers a seamless shopping experience with full inventory management, secure authentication, and support for PayPal and bank payments. 
 
 ## ✨ Features      
 
@@ -29,14 +29,18 @@ A full-stack e-commerce web application built with the MERN stack. It offers a s
 - React  
 - Tailwind CSS  
 - DaisyUI  
-- Redux Toolkit  
+- Redux Toolkit
+- Cloudinary
 
 **Backend**  
 - Node.js  
-- Express.js  
+- Express.js
+- Redis
+- Paypal payment integrated
 - MongoDB + Mongoose  
 - JWT, Cookies  
 - Multer
+- Cloudinary
 
 
 ## 🔧 Getting Started
@@ -54,15 +58,17 @@ Create a .env file in both /frontend and /backend with your configuration like:
 ```bash
 PORT=5000
 NODE_ENV=development
-DATABASE_URL=your_mongo_uri
-JWT_SECRET=your_jwt_secret
+MONGO_URI="your_mongo_uri"
+JWT_SECRET="your_jwt_secret"
 JWT_EXPIRE=30d
+CLIENT_URL="your-client-url"
 PAYPAL_CLIENT_ID=your_paypal_id
-REDIS_URL=redis://localhost:6379
+REDIS_URL="your-redis-url"
 ```
 # Do this env for front end
 ```bash
 NODE_ENV=development
+VITE_SERVER_URL="your-server-url"
 ```
 
 # 3. Install Dependencies
@@ -110,7 +116,7 @@ And more... [Video for clarifying](https://drive.google.com/file/d/1yxQb-9KpTvIg
 - Real-time order status updates with WebSockets
 
 👨‍💻 Author
-- Ahmed Issawy
+- 👨‍💻 Ahmed Issawy
 - 📍 Cairo, Egypt
 - 🔗 [LinkedIn](https://www.linkedin.com/in/ahmed-issawy-53b29528b/)
 

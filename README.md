@@ -40,7 +40,6 @@ A full-stack e-commerce web application. It offers a seamless shopping experienc
 - MongoDB + Mongoose  
 - JWT, Cookies  
 - Multer
-- Cloudinary
 
 
 ## 🔧 Getting Started
